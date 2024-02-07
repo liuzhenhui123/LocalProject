@@ -134,6 +134,18 @@
 		setTimeout(function(){  
 		loadingBg.style.display = "none";
 		loadingBar.style.display = "none";}, 2050);
+		var userAgent = navigator.userAgent || navigator.vendor || window.opera;  
+  
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {  
+    			// iOS  
+			myGameInstance.SendMessage("PlayerData","GetFromWeb","iOS");
+		} else if (/Android/.test(userAgent)) {  
+   		 // Android
+			myGameInstance.SendMessage("PlayerData","GetFromWeb","Android");  
+		} else {  
+    		// 其他设备或浏览器
+  			myGameInstance.SendMessage("PlayerData","GetFromWeb","Android"); 
+		}
         }).catch((message) => {
           alert(message);
         });
